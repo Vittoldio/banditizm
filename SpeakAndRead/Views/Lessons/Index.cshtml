@@ -1,0 +1,72 @@
+﻿@model IEnumerable<SpeakAndRead.Models.Lesson>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Lessons</h1>
+
+
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Course)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Link)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.CourseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Link)
+                </td>
+                <td>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Teacher"))
+                    {
+                        <div class="btn btn-primary">
+
+                            <a asp-action="Edit" asp-route-id="@item.LessonId" style="color:whitesmoke">Edit</a>
+                        </div>
+                    }
+
+                    <div class="btn btn-primary">
+
+                        <a asp-action="Details" asp-route-id="@item.LessonId" style="color:whitesmoke">Details</a>
+                    </div>
+
+                    @if (User.IsInRole("Admin") || User.IsInRole("Teacher"))
+                    {
+                        <div class="btn btn-danger">
+
+                            <a asp-action="Delete" asp-route-id="@item.LessonId" style="color:whitesmoke">Delete</a>
+                        </div>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (User.IsInRole("Admin") || User.IsInRole("Teacher"))
+{
+    <div class="btn btn-primary mb-2 mt-2">
+
+        <a asp-action="Create" style="color:whitesmoke">Create</a>
+    </div>
+}

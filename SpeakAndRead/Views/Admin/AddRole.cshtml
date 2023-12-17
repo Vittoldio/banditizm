@@ -1,0 +1,38 @@
+﻿@model SpeakAndRead.ViewModels.UserRoleViewModel
+
+@{
+    ViewData["Title"] = "Create Enrolment";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>Choose User and Course</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <div class="text-danger">@TempData["Error"]</div>
+        <form asp-action="AddRole">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label">Users</label>
+                <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoleId" class="control-label">Roles</label>
+                <select asp-for="RoleId" class="form-control" asp-items="ViewBag.RoleId"></select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-primary" />
+            </div>
+
+            <div class="btn btn-secondary">
+
+                <a asp-action="Index" style="color:whitesmoke">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,38 @@
+﻿@model SpeakAndRead.Models.CourseUser
+
+@{
+    ViewData["Title"] = "Create Enrolment";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>Choose User and Course</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <div class="text-danger">@TempData["Error"]</div>
+        <form asp-action="CreateEnroll">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CourseId" class="control-label"></label>
+                <select asp-for="CourseId" class="form-control" asp-items="ViewBag.CourseId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Enroll" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="btn btn-secondary">
+
+    <a asp-action="Index" style="color:whitesmoke">Back to list</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
